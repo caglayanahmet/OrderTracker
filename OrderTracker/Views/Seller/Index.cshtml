@@ -1,0 +1,33 @@
+﻿@model OrderTracker.Models.ViewModels.DisplaySellersViewModel
+@{
+    ViewData["Title"] = "Seller Information";
+}
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <a class="btn btn-info" href="seller/edit" style="float:right; margin-bottom:30px;">Add New</a>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Country</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td hidden>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Country</td>
+                    <td></td>
+                    <td>
+                        <a class="btn btn-info" href="seller/edit?id=@item.Id" style="float:right;">Edit</a>
+                        <a class="btn btn-danger" href="seller/delete?id=@item.Id" style="float:right;">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,53 @@
+﻿@model OrderTracker.Models.ViewModels.DisplayDeliveryInfoViewModel
+@{
+    ViewData["Title"] = "Delivery Information";
+}
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <form class="form-inline" style="float:left;">
+        <div class="form-group mx-sm-3 mb-2">
+            <input id="datepicker" name="dateFilter" class="form-control" placeholder="Select Date" />
+            <br />
+        </div>
+        <button type="submit" class="btn btn-info mb-2">Filter by Date</button>
+    </form>
+    <a class="btn btn-info mb-2" href="deliveryinfo/edit" style="float:right;">Add New</a>
+
+    <table class="table table-hover" style="margin-top:30px;">
+        <thead>
+            <tr>
+                <th>Seller</th>
+                <th>Product</th>
+                <th style="text-align:center">Start Week</th>
+                <th style="text-align:center">End Week</th>
+                <th style="text-align:center">Day Difference</th>
+                <th style="text-align:center">Week Difference</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td hidden>@item.Id</td>
+                    <td>@item.Seller</td>
+                    <td>@item.Product</td>
+                    <td style="text-align:center">@item.StartWeek</td>
+                    <td style="text-align:center">@item.EndWeek</td>
+                    <td style="text-align:center; color:@item.DayColor">@item.DayDiff</td>
+                    <td style='text-align:center;color:@item.WeekColor'>@item.WeekDiff</td>
+                    <td>
+                        <a class="btn btn-info" href="deliveryinfo/edit?id=@item.Id" style="float:right;">Edit</a>
+                        <a class="btn btn-danger" href="deliveryinfo/Delete?id=@item.Id" style="float:right;">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script>
+    $('#datepicker').datepicker({
+        uiLibrary: 'bootstrap'
+    });
+</script>
